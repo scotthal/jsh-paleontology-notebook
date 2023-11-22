@@ -1,6 +1,17 @@
 *.ignore
 *checkpoints
 .python-version
+bin
+!bin/bstat_report.sh
+!bin/bstats.sh
+!bin/commits_through_time.sh
+!bin/ctt_report.sh
+!bin/ctt.sh
+etc
+lib
+lib64
 git
+pyvenv.cfg
+share
 stats.sh
 toy
