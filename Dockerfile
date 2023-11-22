@@ -14,6 +14,15 @@ RUN jupyter nbconvert --no-prompt --to script stats.ipynb
 
 FROM python:latest
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update; \
+    apt-get -y dist-upgrade; \
+    apt-get -y install bc; \
+    apt-get autoremove -y; \
+    apt-get clean -y; \
+    rm -rf /var/lib/apt/lists*
+ENV DEBIAN_FRONTEND=
+
 RUN useradd -m -p '*' -s /bin/bash paleontologist
 WORKDIR /home/paleontologist
 USER paleontologist
