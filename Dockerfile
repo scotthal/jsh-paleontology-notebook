@@ -17,7 +17,7 @@ FROM python:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update; \
     apt-get -y dist-upgrade; \
-    apt-get -y install bc; \
+    apt-get -y install bc zstd; \
     apt-get autoremove -y; \
     apt-get clean -y; \
     rm -rf /var/lib/apt/lists*
