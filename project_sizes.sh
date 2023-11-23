@@ -63,7 +63,7 @@ run-on-timestamped-samples() {
 files() { git ls-tree -r --full-tree --name-only ${1:-HEAD}; }
 nfiles() { files $1 | wc -l; }
 lines-and-characters() { git ls-files | grep -v ' ' | xargs -L 1 wc | awk 'BEGIN{ORS=","} {lines+=$1; chars+=$3} END{print lines "," chars}'; } 2>/dev/null
-compressed-size() { tar --exclude-vcs -Jcf - . | wc -c; }
+compressed-size() { tar --exclude-vcs -cf - . | pzstd -c - | wc -c; }
 volumes() {
     git checkout -fq ${1:-HEAD}
     lines-and-characters
@@ -71,10 +71,10 @@ volumes() {
 }
 
 set-project() {
-    #DIR=git
-    #REPO=https://github.com/git/git.git
-    DIR=linux
-    REPO=https://github.com/torvalds/linux.git
+    DIR=git
+    REPO=https://github.com/git/git.git
+    # DIR=linux
+    # REPO=https://github.com/torvalds/linux.git
     OUTPUT=$PWD/sizes/$DIR
     mkdir -p $OUTPUT
     [ -d $DIR ] || git clone -q $REPO # clone source-code repo if it's not already there
