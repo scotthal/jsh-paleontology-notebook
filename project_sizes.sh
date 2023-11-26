@@ -78,10 +78,6 @@ run-on-timestamped-samples() {
     fi
     local func=${1:-true}  # do nothing, i.e., only report the commit
     seq $NREPOS | parallel cd $DIR.{} ';' git checkout -qf $DEFAULT_BRANCH
-    # local sampled_commits=$(sample-revs $npoints | wc -l)
-    # local repo_window=$(($sampled_commits/($NREPOS-1)))
-    # local window_starts=$(for repo in $(seq $NREPOS); do echo 1+'(('$repo-1'))*'$repo_window | bc; done)
-    # local window_ends=$(for repo in $(seq $NREPOS); do echo $repo_window+'(('$repo-1'))'*$repo_window | bc; done)
     seq $NREPOS | parallel iterate-commits $npoints $func {}
 }
 
