@@ -12,6 +12,7 @@ lib
 lib64
 git
 pyvenv.cfg
+run
 share
 stats.sh
 toy
